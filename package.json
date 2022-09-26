@@ -2,7 +2,11 @@
   "name": "GhostyLists",
   "version": "1.0.0",
   "description": "The best bot/server list of the future!",
-  "main": "./src/",
+  "main": "./start",
+  "scripts": {
+    "start": "node start.js",
+    "dev": "nodemon start.js"
+  },
   "repository": "https://github.com/GhostyORG/GhostyBotList.git",
   "author": "killerclaws12 <78247679+killerclaws12@users.noreply.github.com>",
   "license": "MIT",
@@ -11,6 +15,9 @@
     "cute-logs": "^0.0.1",
     "discord.js": "^14.5.0",
     "express": "^4.18.1",
-    "mongoose": "^6.6.2"
+    "glob": "^8.0.3",
+    "mongoose": "^6.6.2",
+    "nodemon": "^2.0.20",
+    "path": "^0.12.7"
   }
 }
