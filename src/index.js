@@ -1,7 +1,11 @@
 const app = require('express')()
 const glob = require('glob')
 const path = require('path')
+const bots = require('./database/models/bots')
 
+app.get('/', (req, res) => {
+    res.redirect('./v1')
+})
 glob('./src/routes/**/*.js', (err, files) => {
     files.forEach((file, index) => {
         const route = require(path.join(__dirname, file.split('./src')[1]))
