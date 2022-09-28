@@ -4,17 +4,17 @@ const path = require('path')
 const bots = require('./database/models/bots')
 
 app.get('/', (req, res) => {
-    res.redirect('./v1')
+    res.redirect('/v1');
 })
 glob('./src/routes/**/*.js', (err, files) => {
     files.forEach((file, index) => {
         const route = require(path.join(__dirname, file.split('./src')[1]))
-        app.use('./v1', route)
+        app.use('/v1',route)
         if (index === files.length-1) {
             app.use((req, res) => {
                 res.status(404).json({
                     error: 'Not Found',
-                    message: "The requested source could not be found."
+                    message: 'The requested resource could not be found.'
                 })
             })
             Listen(3000)

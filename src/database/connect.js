@@ -2,7 +2,7 @@ const {
     connect
 } = require("mongoose")
 
-connect('mongodb://localhost:270177/ghostylists', {
+connect('mongodb+srv://admin:admin@cluster0.qro2b.mongodb.net/GhostyListsBot', {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
