@@ -1,2 +1,4 @@
 node_modules
 yarn.lock
+config.json
+src/database/connect.js
