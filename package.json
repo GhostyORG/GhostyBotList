@@ -13,6 +13,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.27.2",
+    "body-parser": "^1.20.0",
     "cute-logs": "^0.0.1",
     "discord.js": "^14.5.0",
     "express": "^4.18.1",

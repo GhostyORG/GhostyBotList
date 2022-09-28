@@ -2,6 +2,10 @@ const app = require('express')()
 const glob = require('glob')
 const path = require('path')
 const bots = require('./database/models/bots')
+var bodyParser = require('body-parser')
+
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
     res.redirect('/v1');
