@@ -1,5 +1,6 @@
 require('cute-logs')
-const { connection, connect } = require('mongoose')
+const { connection } = require('mongoose')
+const config = global.config = require('./config.json')
 
 require('./src/database/connect')
 

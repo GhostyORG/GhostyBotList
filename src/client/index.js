@@ -1,6 +1,5 @@
 const { Client, GatewayIntentBits, REST, Routes } = require("discord.js")
 const glob = require("glob")
-const path = require("path")
 const client = new Client({ 
     intents: [
         GatewayIntentBits.Guilds,
@@ -12,10 +11,12 @@ const commands = []
 glob('./src/client/commands/*.js', (err, files) => {
     if (err) throw err
     files.forEach((file, index) => {
-        const cmd = require(path.join(__dirname, file.split('./src')[1]))
+        const cmd = require(`./commands/${file.split('/').pop().split('.')[0]}`)
         commands.push({
             name: cmd.name,
-            permissions: cmd.permissions,
+            description: cmd.description || 'No Description Provided',
+            permissions: cmd.permissions ?? [],
+            options: cmd.options ?? [],
             run: cmd.run
         })
         if (index === files.length-1) {
@@ -27,27 +28,29 @@ glob('./src/client/commands/*.js', (err, files) => {
 glob('./src/client/events/*.js', (err, files) => {
     if (err) throw err
     files.forEach((file, index) => {
-        const cmd = require(path.join(__dirname, file.split('./src')[1]))
+        const cmd = require(`./events/${file.split('/').pop().split('.')[0]}`)
         client.on(cmd.name, cmd.run)
-        if (index === events.length-1) {
+        if (index === files.length-1) {
             console.info(`Total Events: ${files.length}`)
         }
     })
 })
 
-const rest = new REST({ version: '10' }).setToken('token')
+const rest = new REST({ version: '10' }).setToken(global.config.client.token)
 
 client.on("ready", async () => {
     try {
-        console.info("Started refreshing application (/) commands.")
-        await rest.put(Routes.applicationCommands(client.id), { body: commands })
-        console.success(`Successfully reloaded application (/) commands.`)
+        await rest.put(Routes.applicationCommands(client.user.id), { 
+            body: commands 
+        })
+        console.success(`Succesffuly reloaded application (/) commands.`)
+        global.commands = commands
     } catch (error) {
         console.error(error)
     }
     console.success(`Logged into: ${client.user.tag}`)
-}).login('token').catch(err => {
-    console.error(`Invalid bot token.`)
+}).login(global.config.client.token).catch(err => {
+    console.error(`Invalid Bot Token.`)
 })
 
 module.exports = client
