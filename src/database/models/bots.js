@@ -9,8 +9,9 @@ const botSchema = new Schema({
     stats: { type: Object, required: true, default: {} },
     status: { type: Number, required: true, default: 0 },
     certificate: { type: Number, required: true, default: 0 },
-    analytics: { type: Object, required: true, default: {} },
-    ratings: { type: Object, required: true, default: {} },
+    analytics: { type: Array, required: true, default: {} },
+    inviteURL: { type: String, required: true, default: null },
+    ratings: { type: Array, required: true, default: {} },
     token: { type: String, required: true, default: 0 },
 }, {
     versionKey: false, 

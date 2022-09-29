@@ -3,6 +3,21 @@ const router = Router()
 const AllBots = require('../../database/models/bots')
 const getBot = require('../../utils/getBot')
 
+
+
+router.get('/bot/:id', (req, res) => {
+    AllBots.findOne({ id: req.params.id }, (err, data) => {
+        if (err) throw err
+        if (!data) return res.json({ error: 'Bot not found.' })
+        res.json({
+            success: true,
+            data
+        })
+    }).select('-_id -token')
+})
+
+
+
 router.get('/bots', async (req, res) => {
     let { page, limit, sort, q, certified, category, ids } = req.query
     if (!page) page = 1

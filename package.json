@@ -5,7 +5,8 @@
   "main": "./start",
   "scripts": {
     "start": "node start.js",
-    "dev": "nodemon start.js"
+    "dev": "nodemon start.js",
+    "bot": "node ./src/client/index.js"
   },
   "repository": "https://github.com/GhostyORG/GhostyBotList.git",
   "author": "killerclaws12 <78247679+killerclaws12@users.noreply.github.com>",
@@ -14,8 +15,9 @@
   "dependencies": {
     "axios": "^0.27.2",
     "body-parser": "^1.20.0",
+    "crypto": "^1.0.1",
     "cute-logs": "^0.0.1",
-    "discord.js": "^14.5.0",
+    "discord.js": "^14.3.0",
     "express": "^4.18.1",
     "glob": "^8.0.3",
     "mongoose": "^6.6.2",

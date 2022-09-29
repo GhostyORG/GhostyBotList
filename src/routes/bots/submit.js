@@ -120,7 +120,10 @@ router.post('/bots/submit', async (req, res) => {
                 dailyVotes: 0,
                 weeklyVotes: 0,
                 monthlyVotes: 0
-            }
+            },
+            ratings: [],
+            analytics: [],
+            token: createToken(128),
         }).save().then(() => {
             res.json({
                 success: true,
