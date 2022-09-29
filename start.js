@@ -5,5 +5,8 @@ require('./src/database/connect')
 
 connection.on('connected', () => {
     console.success('Connected to database.', 'GHOSTY')
-    require('./src/index')
+    const Client = require('./src/client')
+    Client.on('ready', () => {
+        require('./src/index')
+    })
 })

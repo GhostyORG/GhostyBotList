@@ -13,7 +13,11 @@ glob('./src/client/commands/*.js', (err, files) => {
     if (err) throw err
     files.forEach((file, index) => {
         const cmd = require(path.join(__dirname, file.split('./src')[1]))
-        commands.push(cmd)
+        commands.push({
+            name: cmd.name,
+            permissions: cmd.permissions,
+            run: cmd.run
+        })
         if (index === files.length-1) {
             console.info(`Total Commands: ${files.length}`)
         }
@@ -45,3 +49,5 @@ client.on("ready", async () => {
 }).login('token').catch(err => {
     console.error(`Invalid bot token.`)
 })
+
+module.exports = client
