@@ -14,15 +14,32 @@ async function generate(length) {
 
     newValue += crypto.createHash('sha256').update(Math.random().toString(36).substring(2)).digest('hex').substring(0, (length / values.length+1))
 
-    const user = await Users.findOne({ where: { token: newValue } }).select('token')
-    if (user) return false 
+    const user = await Users.find({ token: newValue }).countDocuments()
+    if (user> 0) return false
+    if (user > 1) resetUserTokens([ await Users.find({ token: newValue }).select('id') ])
 
-    const bot = await Bots.findOne({ where: { token: newValue } }).select('token')
-    if (bot) return false 
+    const bot = await Bots.find({ token: newValue }).countDocuments()
+    if (bot > 0) return false
+    if (bot > 1) resetBotTokens([ await Bots.find({ token: newValue }).select('id') ])
 
     return newValue
 }
 
+async function resetBotTokens(ids) {
+    let bots = await Bots.find({ id: { $in: ids } })
+    for (let i = 0; i < bots.length; i++) {
+        bots[i].token = await generate(72)
+        await bots[i].save()
+    }
+}
+
+async function resetUserTokens(ids) {
+    let users = await Users.find({ id: { $in: ids } })
+    for (let i = 0; i < users.length; i++) {
+        users[i].token = await generate(72)
+        await users[i].save()
+    }
+}
 module.exports = async length => {
     let id = await generate(length)
     while (!id) {
