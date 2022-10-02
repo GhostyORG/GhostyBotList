@@ -15,12 +15,16 @@ async function generate(length) {
     newValue += crypto.createHash('sha256').update(Math.random().toString(36).substring(2)).digest('hex').substring(0, (length / values.length+1))
 
     const user = await Users.find({ token: newValue }).countDocuments()
-    if (user> 0) return false
-    if (user > 1) resetUserTokens([ await Users.find({ token: newValue }).select('id') ])
+    if (user > 0) return false
+    while (user > 1) {
+        resetUserTokens([ await Users.find({ token: newValue }).select('id') ])
+    }
 
     const bot = await Bots.find({ token: newValue }).countDocuments()
     if (bot > 0) return false
-    if (bot > 1) resetBotTokens([ await Bots.find({ token: newValue }).select('id') ])
+    while (bot > 1) {
+        resetBotTokens([ await Bots.find({ token: newValue }).select('id') ])
+    }
 
     return newValue
 }
