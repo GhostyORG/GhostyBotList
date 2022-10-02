@@ -28,7 +28,7 @@ router.get('/auth/callback', Handler(passport.authenticate('discord'), {
                     },
                     permissions: [],
                     isBanned: false,
-                    token: createToken(72)
+                    token: await createToken(72)
                 })
                 req.session.user = newUser
             } else {
@@ -44,7 +44,7 @@ router.get('/auth/callback', Handler(passport.authenticate('discord'), {
                         avatar: req.session.user.avatar,
                         tag: req.session.user.username + '#' + req.session.user.discriminator
                     },
-                    token: createToken(72)
+                    token: await createToken(72)
                 })
                 req.session.user = updatedUser
             }

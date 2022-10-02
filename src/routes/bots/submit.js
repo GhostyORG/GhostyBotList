@@ -123,11 +123,14 @@ router.post('/bots/submit', async (req, res) => {
             },
             ratings: [],
             analytics: [],
-            token: createToken(128),
+            token: await createToken(128),
         }).save().then(() => {
             res.json({
                 success: true,
-                message: 'Bot submitted successfully.'
+                message: 'Bot submitted successfully.',
+                data: {
+                    id
+                }
             })
         }).catch(err => {
             res.json({

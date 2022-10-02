@@ -1,4 +1,5 @@
 const crypto = require('crypto')
+const Bots = require('../database/models/bots')
 const Users = require('../database/models/users')
 
 function createRandomString(length) {
@@ -12,6 +13,14 @@ async function generate(length) {
     }
 
     newValue += crypto.createHash('sha256').update(Math.random().toString(36).substring(2)).digest('hex').substring(0, (length / values.length+1))
+
+    const user = await Users.findOne({ where: { token: newValue } }).select('token')
+    if (user) return false 
+
+    const bot = await Bots.findOne({ where: { token: newValue } }).select('token')
+    if (bot) return false 
+
+    return newValue
 }
 
 module.exports = async length => {
