@@ -16,7 +16,7 @@ router.get('/auth/callback', Handler(passport.authenticate('discord'), {
         try {
             const user = await Users.findOne({ where: { 'profile.id': req.session.user.id } }).select('profile.id')
             if (!user) {
-                const id = generateId(18)
+                const id = await generateId(18)
                 const newUser = await Users.create({
                     id,
                     profile: {
