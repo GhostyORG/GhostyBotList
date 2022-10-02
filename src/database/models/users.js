@@ -5,7 +5,7 @@ module.exports = model('users', new Schema({
     profile: { type: Object, required: true },
     permissions: { type: Array, required: true, default: [] },
     isBanned: { type: Boolean, required: true, default: false },
-    token: { type: STring, required: true, default: null }
+    token: { type: String, required: true, default: null }
 }, {
     versionKey: false,
     timestamps: true
