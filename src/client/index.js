@@ -43,8 +43,8 @@ client.on("ready", async () => {
         await rest.put(Routes.applicationCommands(client.user.id), { 
             body: commands 
         })
+
         console.success(`Succesffuly reloaded application (/) commands.`)
-        global.commands = commands
     } catch (error) {
         console.error(error)
     }
@@ -54,3 +54,4 @@ client.on("ready", async () => {
 })
 
 module.exports = client
+module.exports.command = commands

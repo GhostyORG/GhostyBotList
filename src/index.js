@@ -2,10 +2,23 @@ const app = require('express')()
 const glob = require('glob')
 const path = require('path')
 const bots = require('./database/models/bots')
-var bodyParser = require('body-parser')
 
+app.use(require('express-session')({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+}))
+
+var bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
+var passport = require('passport')
+passport.serializeUser((user, done) => done(null, user))
+passport.deserializeUser((obj, done) => done(null, obj))
+app.use(passport.initialize()) 
+app.use(passport.session())
+app.use(passport.authenticate('session'))
 
 app.get('/', (req, res) => {
     res.redirect('/v1');
