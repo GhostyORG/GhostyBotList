@@ -1,3 +1,3 @@
 ## TODO LIST
 
-- [  ] test
+- [ ] test
