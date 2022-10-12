@@ -11,3 +11,7 @@
 - [ ] Cleanup the code.
 - [ ] Fix profile's so when you click edit, it doesn't say "Holy Cow! No Users Found".
 - [ ] Fix the main bot and server page so when you click it, it shows all bots astead of none when there were bots listed on the site.
+- [ ] Add a delete button to the bots and servers so you can delete your server or bot from the list.
+- [ ] Make the admin tab, clickable and only seeable to bot reviewers, admins and owner.
+
+---
