@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/GhostyORG/GhostyBotList#readme",
   "dependencies": {
-    "autoprefixer": "^10.4.8",
+    "autoprefixer": "^10.4.13",
     "body-parser": "^1.20.0",
     "canvas": "^2.9.3",
     "colors": "^1.4.0",
